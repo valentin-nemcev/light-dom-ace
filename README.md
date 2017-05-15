@@ -1,2 +1,2 @@
-# snabbdom-ace
-Ace editor module for snabbdom
+# light-dom-ace
+Ace editor module for light-dom
