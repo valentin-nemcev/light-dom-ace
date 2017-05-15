@@ -1,6 +1,0 @@
-{
-    "extends": "qe-frontend",
-    "settings": {
-        "import/resolver": "node"
-    }
-}
