@@ -45,6 +45,13 @@ export default function (aceEditor) {
             editor.$blockScrolling = Infinity; // Disable warning
             editor.setTheme('ace/theme/clouds');
             editor.setShowPrintMargin(false);
+            if (options.readOnly) {
+                Object.assign(options, {
+                    highlightActiveLine: false,
+                    showGutter: false,
+                });
+                editor.renderer.$cursorLayer.element.style.display = 'none';
+            }
             editor.setStyle(setStyle);
             editor.setOptions({
                 minLines: 3,
