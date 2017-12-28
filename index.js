@@ -42,6 +42,7 @@ export default function (aceEditor) {
 
             const aceEl = document.createElement('div');
             const editor = ace.edit(aceEl);
+            let editorPrevValue = '';
             editor.$blockScrolling = Infinity; // Disable warning
             editor.setTheme('ace/theme/clouds');
             editor.setShowPrintMargin(false);
@@ -69,10 +70,11 @@ export default function (aceEditor) {
                 'change',
                 () => {
                     // Change was initiated by user, not API call
-                    if (editor.curOp && editor.curOp.command.name) {
+                    if (editorPrevValue != editor.getValue()) {
                         elm.value = editor.getValue();
                         // For snabbdom native event listeners, no IE <=11 support
                         elm.dispatchEvent(new Event('change', {bubbles: true}));
+                        editorPrevValue == editor.getValue();
                     }
                 }
             );
