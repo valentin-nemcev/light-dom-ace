@@ -42,7 +42,7 @@ export default function (aceEditor) {
 
             const aceEl = document.createElement('div');
             const editor = ace.edit(aceEl);
-            const editorPrevValue = '';
+            let editorPrevValue = '';
             editor.$blockScrolling = Infinity; // Disable warning
             editor.setTheme('ace/theme/clouds');
             editor.setShowPrintMargin(false);
