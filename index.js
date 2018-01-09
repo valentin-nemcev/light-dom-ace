@@ -1,6 +1,7 @@
 import ace from 'brace';
-import 'brace/theme/clouds';
+import 'brace/theme/chrome';
 import 'brace/mode/json';
+import 'brace/mode/sql';
 import 'brace/ext/searchbox';
 
 import './index.css';
@@ -44,7 +45,7 @@ export default function (aceEditor) {
             const editor = ace.edit(aceEl);
             let editorPrevValue = '';
             editor.$blockScrolling = Infinity; // Disable warning
-            editor.setTheme('ace/theme/clouds');
+            editor.setTheme('ace/theme/chrome');
             editor.setShowPrintMargin(false);
             if (options.readOnly) {
                 Object.assign(options, {
