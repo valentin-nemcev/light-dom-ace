@@ -75,7 +75,7 @@ export default function (aceEditor) {
                         elm.value = editor.getValue();
                         // For snabbdom native event listeners, no IE <=11 support
                         elm.dispatchEvent(new Event('change', {bubbles: true}));
-                        editorPrevValue == editor.getValue();
+                        editorPrevValue = editor.getValue();
                     }
                 }
             );
