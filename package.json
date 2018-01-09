@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "postversion": "git push --follow-tags"
+    "postversion": "git push --follow-tags",
+    "precommit": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,9 @@
     "babel-plugin-transform-object-rest-spread": "6.8.0",
     "babel-preset-es2015": "6.14.0",
     "babel-register": "6.14.0",
-    "eslint-config-qe-frontend": "git+https://github.com/valentin-nemcev/eslint-config-qe-frontend.git#v1.2.0",
-    "frontend-webpack-config": "git+ssh://git@git.qe-infra.yandex-team.ru/search-evaluation/frontend-webpack-config.git#v1.6.2"
+    "eslint-config-qe-frontend": "git+https://github.com/valentin-nemcev/eslint-config-qe-frontend.git#v1.2.4",
+    "frontend-webpack-config": "git+ssh://git@git.qe-infra.yandex-team.ru/search-evaluation/frontend-webpack-config.git#v1.6.2",
+    "husky": "^0.14.3"
   },
   "license": "MIT",
   "bugs": {
