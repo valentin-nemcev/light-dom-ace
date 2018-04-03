@@ -35,8 +35,7 @@ const aceEditorModule = {
 
 export default function (aceEditor) {
     return {
-        insert(vnode) {
-            const elm = vnode.elm;
+        afterAttach(elm) {
             if (elm.hasAceEditor) return;
 
             const {setStyle, mode, options = {}} = aceEditor;
@@ -70,10 +69,9 @@ export default function (aceEditor) {
             session.on(
                 'change',
                 () => {
-                    // Change was initiated by user, not API call
                     if (editorPrevValue != editor.getValue()) {
                         elm.value = editor.getValue();
-                        // For snabbdom native event listeners, no IE <=11 support
+                        // For dom native event listeners, no IE <=11 support
                         elm.dispatchEvent(new Event('change', {bubbles: true}));
                         editorPrevValue = editor.getValue();
                     }
@@ -82,25 +80,18 @@ export default function (aceEditor) {
 
             aceEditorModule._editors.set(elm, editor);
 
-            // Defer initial update for better perceived performance when text is
-            // long
-            setTimeout(() => aceEditorModule._updateValue(editor, vnode), 1);
-
             elm.hasAceEditor = true;
             elm.hidden = true;
             elm.after(aceEl);
         },
 
-        update: (oldVnode, vnode) => {
+        afterUpdate(vnode) {
             const editor = aceEditorModule._editors.get(vnode.elm);
             editor && aceEditorModule._updateValue(editor, vnode);
         },
 
-        destroy: (vnode) => {
-
-            const hook = vnode.data.hook || {};
-            delete hook.insert;
-            const editor = aceEditorModule._editors.get(vnode.elm);
+        beforeDetach(elm) {
+            const editor = aceEditorModule._editors.get(elm);
             editor.destroy();
             editor.container.remove();
         },
