@@ -56,7 +56,7 @@ export default function (aceEditor) {
             editor.setStyle(setStyle);
             editor.setOptions({
                 minLines: 3,
-                maxLines: Infinity,
+                maxLines: 0,
                 ...options,
             });
 
@@ -66,6 +66,11 @@ export default function (aceEditor) {
             const session = editor.getSession();
             session.setMode('ace/mode/' + mode);
             session.setUseWrapMode(true);
+
+            aceEditorModule._editors.set(elm, editor);
+            const text = elm.value;
+            editor.setValue(text != null ? text : '', -1);
+
             session.on(
                 'change',
                 () => {
@@ -77,8 +82,6 @@ export default function (aceEditor) {
                     }
                 }
             );
-
-            aceEditorModule._editors.set(elm, editor);
 
             elm.hasAceEditor = true;
             elm.hidden = true;
