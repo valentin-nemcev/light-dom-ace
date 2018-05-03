@@ -95,6 +95,7 @@ export default function (aceEditor) {
 
         beforeDetach(elm) {
             const editor = aceEditorModule._editors.get(elm);
+            elm.hasAceEditor = false;
             editor.destroy();
             editor.container.remove();
         },
